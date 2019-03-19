@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+    integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script src="http://dimplejs.org/dist/dimple.v2.1.6.min.js"></script>
+
+  <script src="js/imdb.js"></script>
+  <meta charset="UTF-8">
+</head>
+
+<body>
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container text-center">
+      <h1 class="display-3"> IMDB Movie Analysis</h1>
+      <p class="lead">By Fatih, Kaushik, Mary, Prasanna </p>
+      <img src="now showing.jpg" alt="Spongebob!" style="width:550px;height:300px;" />
+    </div>
+  </div>
+
+  <div id="genreChartContainer" class="chartContainer">
+    <script type="text/javascript">
+
+      var start_year = 1915;
+
+      var end_year = 2013;
+      var data_source = "http://localhost:8000/data/yearly_data.tsv";
+      var name = "IMDB Yearly Movie And Genre Counts (1915-2013)";
+      createGenreChart("#genreChartContainer",
+        data_source,
+        name,
+        start_year,
+        end_year);
+    </script>
+  </div>
+
+  <form class="form" id="genreToggleForm">
+    <div class="switch-field">
+      <!--   <div class="switch-title">Display Type</div> -->
+      <input type="radio" id="switch_left" name="switch" value="yes" checked />
+      <label for="switch_left">Counts</label>
+      <input type="radio" id="switch_right" name="switch" value="no" />
+      <label for="switch_right">Percents</label>
+    </div>
+  </form>
+
+
+
+  <div id="lengthBinChartContainer" class="chartContainer">
+    <script type="text/javascript">
+      createHistChart("#lengthBinChartContainer",
+        "http://localhost:8000/data/length_data_hist.tsv",
+        true,
+        "IMDB Movie Length Distribution (2003-2013) ",
+        "length",
+        false,
+        "Length (minutes)");
+    </script>
+  </div>
+
+  <div id="votesBinChartContainer" class="chartContainer">
+    <script type="text/javascript">
+      createHistChart("#votesBinChartContainer",
+        "http://localhost:8000/data/votes_data_hist.tsv",
+        true,
+        "IMDB Movie Vote # Distribution (2003-2013) ",
+        "votes",
+        true,
+        "IMDB User Vote Count");
+    </script>
+  </div>
+
+  <div id="budgetChartContainer" class="chartContainer">
+    <script type="text/javascript">
+      createLineChart("#budgetChartContainer",
+        "http://localhost:8000/data/budget_data.tsv",
+        true,
+        "IMDB Movie Budget Distribution (2003-2013) ",
+        "budget",
+        true,
+        "Budget (USD)",
+        "average");
+    </script>
+  </div>
+
+
+</body>
+
+</html>
